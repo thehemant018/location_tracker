@@ -2,6 +2,7 @@ import {useState} from 'react'
 import './App.css';
 
 function App() {
+  const zoom = 16;
   const [latitude, setLatitude] = useState()
   const [longitude, setLongitude] = useState()
   const [userAddress, setUserAddress] = useState()
@@ -29,6 +30,7 @@ function App() {
     const data=await loc.json()
     // console.log("User address :",data);
     // console.log("User City :",data.results[0].components.city);
+    console.log("User Country :",data.results[0].components.country);
     setUserAddress(data.results[0].formatted)
   }
 
@@ -63,6 +65,15 @@ function App() {
       <h1> GPS TRACKING</h1>
       <h3>GPS Latitude : {GPSlatitude}</h3>
       <h3>GPS Longitude : {GPSlongitude}</h3>
+
+      <iframe
+                width="600"
+                height="450"
+                style={{ border: "none" }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"             src={`https://maps.google.com/maps?q=${GPSlatitude},${GPSlongitude}&z=${zoom}&output=embed`}
+                title="google map"
+            ></iframe>
     </>
   );
 }
